@@ -1,0 +1,10 @@
+---
+- name: Estatísticas dos containers
+  hosts: docker_host
+  become: yes
+  tasks:
+    - command: docker stats --no-stream
+      register: stats
+
+    - debug:
+        var: stats.stdout_lines

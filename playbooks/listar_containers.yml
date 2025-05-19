@@ -1,0 +1,11 @@
+---
+- name: Listar containers
+  hosts: docker_host
+  become: yes
+  tasks:
+    - name: Lista containers
+      command: docker ps
+      register: saida
+
+    - debug:
+        var: saida.stdout_lines

@@ -1,0 +1,10 @@
+---
+- name: Logs do web1
+  hosts: docker_host
+  become: yes
+  tasks:
+    - command: docker logs web1
+      register: log
+
+    - debug:
+        var: log.stdout_lines

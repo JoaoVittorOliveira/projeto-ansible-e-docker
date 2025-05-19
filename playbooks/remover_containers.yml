@@ -1,0 +1,10 @@
+---
+- name: Remover containers
+  hosts: docker_host
+  become: yes
+  tasks:
+    - docker_container:
+        name: "{{ item }}"
+        state: absent
+        force_kill: yes
+      loop: "{{ range(1, 9) | map('regex_replace', '^', 'web') | list }}"

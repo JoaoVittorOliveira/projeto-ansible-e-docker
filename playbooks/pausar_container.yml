@@ -1,0 +1,6 @@
+---
+- name: Pausar web1
+  hosts: docker_host
+  become: yes
+  tasks:
+    - command: docker pause web1

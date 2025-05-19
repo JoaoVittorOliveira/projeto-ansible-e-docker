@@ -1,0 +1,29 @@
+---
+- name: Criar containers web
+  hosts: docker_host
+  become: yes
+  vars:
+    total: 8
+
+  tasks:
+    - name: Baixa imagem Nginx
+      docker_image:
+        name: nginx
+        source: pull
+
+    - name: Cria páginas HTML personalizadas
+      copy:
+        dest: "/tmp/web{{ item }}.html"
+        content: "<h1>Bem-vindo ao container {{ item }}</h1>"
+      loop: "{{ range(1, total + 1) }}"
+
+    - name: Cria containers com Nginx
+      docker_container:
+        name: "web{{ item }}"
+        image: nginx
+        state: started
+        ports:
+          - "{{ 8080 + item }}:80"
+        volumes:
+          - "/tmp/web{{ item }}.html:/usr/share/nginx/html/index.html"
+      loop: "{{ range(1, total + 1) }}"

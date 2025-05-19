@@ -1,0 +1,12 @@
+---
+- name: Parar containers
+  hosts: docker_host
+  become: yes
+  tasks:
+    - docker_container:
+        name: "{{ item }}"
+        state: stopped
+      loop:
+        - web2
+        - web3
+        - web4
