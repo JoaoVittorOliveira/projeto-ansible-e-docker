@@ -93,8 +93,8 @@ Todos os comandos abaixo devem ser executados na **VM1** (Ansible Control).
 ### ✅ 1. Instalar o Docker
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/1instalar_docker.yml
-``
+ansible-playbook -i hosts.ini playbooks/instalar_docker.yml
+```
 
 ### ✅ 2. Baixar a imagem do Docker Hub
 
