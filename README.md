@@ -72,15 +72,15 @@ ssh -i ~/.ssh/id_ansible root@IP_DA_VM2
 ansible-docker-web/
 ├── hosts.ini
 ├── playbooks/
-│   ├── 1_instalar_docker.yml
-│   ├── 2_baixar_imagem.yml
-│   ├── 3_criar_containers.yml
-│   ├── 4_listar_containers.yml
-│   ├── 5_estatisticas.yml
-│   ├── 6_logs.yml
-│   ├── 7_pausar_container.yml
-│   ├── 8_parar_container.yml
-│   └── 9_excluir_todos.yml
+│   ├── instalar_docker.yml
+│   ├── baixar_imagem.yml
+│   ├── criar_containers.yml
+│   ├── listar_containers.yml
+│   ├── estatisticas.yml
+│   ├── logs.yml
+│   ├── pausar_container.yml
+│   ├── parar_container.yml
+│   └── excluir_todos.yml
 └── README.md
 ```
 
@@ -93,55 +93,55 @@ Todos os comandos abaixo devem ser executados na **VM1** (Ansible Control).
 ### ✅ 1. Instalar o Docker
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/1_instalar_docker.yml
-```
+ansible-playbook -i hosts.ini playbooks/1instalar_docker.yml
+``
 
 ### ✅ 2. Baixar a imagem do Docker Hub
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/2_baixar_imagem.yml
+ansible-playbook -i hosts.ini playbooks/baixar_imagem.yml
 ```
 
 ### ✅ 3. Criar 8 containers web personalizados (Nginx)
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/3_criar_containers.yml
+ansible-playbook -i hosts.ini playbooks/criar_containers.yml
 ```
 
 ### ✅ 4. Listar todos os containers
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/4_listar_containers.yml
+ansible-playbook -i hosts.ini playbooks/listar_containers.yml
 ```
 
 ### ✅ 5. Ver estatísticas de uso dos containers
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/5_estatisticas.yml
+ansible-playbook -i hosts.ini playbooks/estatisticas.yml
 ```
 
 ### ✅ 6. Ver logs de um container em tempo real
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/6_logs.yml
+ansible-playbook -i hosts.ini playbooks/logs.yml
 ```
 
 ### ✅ 7. Pausar 1 container
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/7_pausar_container.yml
+ansible-playbook -i hosts.ini playbooks/pausar_container.yml
 ```
 
 ### ✅ 8. Parar 3 containers
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/8_parar_container.yml
+ansible-playbook -i hosts.ini playbooks/parar_container.yml
 ```
 
 ### ✅ 9. Remover todos os containers
 
 ```bash
-ansible-playbook -i hosts.ini playbooks/9_excluir_todos.yml
+ansible-playbook -i hosts.ini playbooks/excluir_todos.yml
 ```
 
 ---
