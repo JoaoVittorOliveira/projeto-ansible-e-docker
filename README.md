@@ -148,63 +148,7 @@ ansible-playbook -i hosts.ini playbooks/remover_containers.yml
 
 ---
 
-### 🔐 Passo 1: Configurar SSH entre VM1 e VM2
-
-Na **VM1**, gere uma chave SSH:
-
-```bash
-ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_ansible
-```
-
-Copie a chave pública para a **VM2**:
-
-```bash
-ssh-copy-id -i ~/.ssh/id_ansible.pub root@IP_DA_VM2
-```
-
-Verifique a conexão:
-
-```bash
-ssh -i ~/.ssh/id_ansible root@IP_DA_VM2
-```
-
----
-
-### 📝 Passo 2: Configurar o arquivo `hosts.ini`
-
-Edite o arquivo `hosts.ini` com o IP da sua VM2:
-
-```ini
-[docker_host]
-SEU_IP_AQUI ansible_user=root ansible_ssh_private_key_file=~/.ssh/id_ansible
-```
-
-**Exemplo:**
-```ini
-[docker_host]
-203.0.113.45 ansible_user=root ansible_ssh_private_key_file=~/.ssh/id_ansible
-```
-
----
-
-### 🐍 Passo 3: Instalar Ansible na VM1
-
-```bash
-apt update
-apt install software-properties-common
-add-apt-repository --yes --update ppa:ansible/ansible
-apt install ansible -y
-```
-
-Verifique a instalação:
-
-```bash
-ansible --version
-```
-
----
-
-## 🚀 Passos para Replicar o Projeto
+## 🚀 Como Replicar o Projeto
 
 ### Passo 1: Preparar as Máquinas Virtuais
 
@@ -285,8 +229,6 @@ IP_DA_VM2 | SUCCESS => {
 ansible-playbook -i hosts.ini playbooks/instalar_docker.yml
 ```
 
-Espere a conclusão (2-3 minutos).
-
 ### Passo 7: Criar os Containers Web
 
 ```bash
@@ -319,7 +261,7 @@ Você verá a mensagem: "Bem-vindo ao container X"
 
 ---
 
-## 📊 Comandos Úteis para Gerenciar Containers
+## 📊 Outros Comandos Úteis para Gerenciar Containers
 
 Listar containers:
 ```bash
@@ -353,7 +295,15 @@ ansible-playbook -i hosts.ini playbooks/remover_containers.yml
 
 ---
 
-## 🔍 Resolução de Problemas
+## 📌 Observações
+
+- Todos os containers são criados com páginas diferentes no index.html.
+- As portas são redirecionadas automaticamente para acesso externo (808x).
+- O projeto usa Ansible com `become: true`, então o usuário remoto deve ter permissão sudo.
+
+---
+
+## 🔍 Problemas comuns
 
 ### ❌ "Falha ao conectar via SSH"
 - Verifique se a chave pública foi copiada: `cat ~/.ssh/id_ansible.pub`
@@ -369,6 +319,7 @@ ansible-playbook -i hosts.ini playbooks/remover_containers.yml
 ### ❌ "Containers não estão sendo criados"
 - Verifique se Docker foi instalado: `ansible -i hosts.ini docker_host -m shell -a "docker --version"`
 - Verifique logs: `ansible-playbook -i hosts.ini playbooks/logs_container.yml`
+- Verifique se o serviço do docker está rodando
 
 ---
 
@@ -389,11 +340,3 @@ Criado como projeto educacional para ensinar Ansible + Docker.
 ## 📝 Licença
 
 Este projeto é de código aberto e pode ser usado livremente para fins educacionais e comerciais.
-
----
-
-## 📌 Observações
-
-- Todos os containers são criados com páginas diferentes no index.html.
-- As portas são redirecionadas automaticamente para acesso externo (808x).
-- O projeto usa Ansible com `become: true`, então o usuário remoto deve ter permissão sudo.
